@@ -24,12 +24,9 @@ def index(request):
     list_items = ""
     months = list(monthly_challenges.keys())
 
-    for month in months:
-        capitalize_month = month.capitalize()
-        redirect_path = reverse("monthly-challenge", args=[month])
-        list_items += f"<li><a href={redirect_path}>{
-            capitalize_month}</a></li>"
-    return HttpResponse(f"<ul>{list_items}</ul>")
+    context = {"months": months}
+
+    return render(request=request, template_name="challenges/index.html", context=context)
 
 
 def monthly_challenge_by_number(request, month):
